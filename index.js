@@ -1,13 +1,24 @@
 import fs from 'fs';
-import { Client } from 'whatsapp-web.js';
+import { createServer } from 'http';
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { format } from 'util';
+import { tmpdir } from 'os';
+import { spawn } from 'child_process';
+import { readdirSync, statSync, unlinkSync, existsSync, readFileSync, watch, rmSync } from 'fs';
+import yargs from 'yargs';
 import puppeteer from 'puppeteer-core';
 import qrcode from 'qrcode-terminal';
-import express from 'express';
-import { createServer } from 'http';
-import path from 'path';
 import { toBuffer } from 'qrcode';
 import fetch from 'node-fetch';
 import { useMultiFileAuthState } from '@whiskeysockets/baileys';
+
+import './config.js';
+import { createRequire } from 'module';
+import { makeWASocket } from './lib/simple.js';
+import './src/connect.js';
+import './handler.js';  // Importar después de las configuraciones y la inicialización de WhatsApp
 
 const SESIONES_FOLDER = './sesiones';
 const SESSION_FILE_PATH = './sesiones/session.json';
@@ -56,24 +67,4 @@ client.on('auth_failure', (error) => {
   console.error('Error al autenticar:', error);
 });
 
-import './handler.js';
-import './config.js';
-import { createRequire } from 'module';
-import { fileURLToPath } from 'url';
-import yargs from 'yargs';
-import { spawn } from 'child_process';
-import { readdirSync, statSync, unlinkSync, existsSync, readFileSync, watch, rmSync } from 'fs';
-import { tmpdir } from 'os';
-import { format } from 'util';
-import { makeWASocket } from './lib/simple.js';
-
-const __dirname = global.__dirname(import.meta.url);
-const pluginFolder = global.__dirname(path.join(__dirname, './plugins'));
-
-import './src/connect.js';
-
-if (opts['server']) {
-  (await import('./server.js')).default(global.conn, PORT);
-}
-
-process.on('uncaughtException', console.error);
+// Resto del código...
