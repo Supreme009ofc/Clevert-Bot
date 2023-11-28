@@ -1,0 +1,25 @@
+{
+  "name": "Clevert-bot",
+  "version": "1.0.0",
+  "description": "Bot de WhatsApp",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Supreme009ofc/Clevert-Bot.git"
+  },
+  "author": "SUPREME009",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Supreme009ofc/Clevert-Bot/issues"
+  },
+  "homepage": "https://github.com/Supreme009ofc/Clevert-Bot#readme",
+  "dependencies": {
+    "whatsapp-web.js": "^1.23.0",
+    "qrcode": "^1.4.4"
+  }
+}
